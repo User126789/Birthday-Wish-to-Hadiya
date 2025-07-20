@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday My Love</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -164,16 +167,15 @@
             box-shadow: 0 25px 50px rgba(200, 107, 248, 0.4);
         }
 
+        /* Updated styles for image containers */
         .memory-img {
             height: 220px;
-            background: linear-gradient(45deg, #3d1a3d, #5a2a5a);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 4.5rem;
-            color: #ff6b8b;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(45deg, #3d1a3d, #5a2a5a);
         }
 
         .memory-img:after {
@@ -186,6 +188,17 @@
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(200,107,248,0.3)" stroke-width="2"/></svg>');
             background-size: cover;
             opacity: 0.5;
+        }
+
+        .memory-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .memory-card:hover .memory-img img {
+            transform: scale(1.1);
         }
 
         .memory-content {
@@ -276,19 +289,22 @@
             background-size: cover;
         }
 
-        .sticker:nth-child(1) { 
+        .sticker:nth-child(1) {
             color: #ff6b8b;
             animation-delay: 0s;
         }
-        .sticker:nth-child(2) { 
+
+        .sticker:nth-child(2) {
             color: #c86bf8;
             animation-delay: 1s;
         }
-        .sticker:nth-child(3) { 
+
+        .sticker:nth-child(3) {
             color: #ff6b8b;
             animation-delay: 2s;
         }
-        .sticker:nth-child(4) { 
+
+        .sticker:nth-child(4) {
             color: #c86bf8;
             animation-delay: 3s;
         }
@@ -320,6 +336,46 @@
             position: relative;
             border: 1px solid rgba(200, 107, 248, 0.3);
         }
+/* Gallery Image Styling */
+.gallery-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 25px 25px 0 0;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 150%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .gallery-image img {
+    transform: scale(1.1);
+}
+
+/* Gallery Caption Styling */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(61, 26, 61, 0.9);
+    color: #e8c3ff;
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 0 0 25px 25px;
+    transition: all 0.4s ease;
+    z-index: 2;
+}
+
+.gallery-item:hover .gallery-caption {
+    background: rgba(200, 107, 248, 0.8);
+    color: white;
+}
 
         .gallery-item:before {
             content: '';
@@ -413,50 +469,127 @@
 
         /* Animations */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-25px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-25px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         @keyframes petal-fall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         /* Responsive */
         @media (max-width: 900px) {
-            h1 { font-size: 4rem; }
-            .subtitle { font-size: 1.8rem; }
-            .section-title { font-size: 2.5rem; }
-            .couple-container { width: 280px; height: 280px; }
-            .section { padding: 40px 30px; }
+            h1 {
+                font-size: 4rem;
+            }
+
+            .subtitle {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .couple-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .section {
+                padding: 40px 30px;
+            }
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 3rem; }
-            .subtitle { font-size: 1.5rem; }
-            .logo { font-size: 3.5rem; }
-            .section { padding: 30px 20px; }
-            .memory-card { width: 100%; max-width: 350px; }
-            .section-title { font-size: 2rem; }
-            .sticker { width: 120px; height: 120px; font-size: 3rem; }
-            .wish-btn { padding: 18px 50px; font-size: 1.5rem; }
-            .music-control { width: 70px; height: 70px; font-size: 1.8rem; }
+            h1 {
+                font-size: 3rem;
+            }
+
+            .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 3.5rem;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .memory-card {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .sticker {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .wish-btn {
+                padding: 18px 50px;
+                font-size: 1.5rem;
+            }
+
+            .music-control {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Floating petals background -->
     <div class="petals-container"></div>
-    
+
     <div class="container">
         <header>
             <div class="logo">
@@ -464,63 +597,73 @@
             </div>
             <h1>Happy Birthday Hadiya!</h1>
             <p class="subtitle">To the love of my life, my everything</p>
-            
+
             <div class="couple-container">
                 <div class="couple"></div>
             </div>
         </header>
-        
+
         <div class="section">
             <h2 class="section-title">Our Journey Together</h2>
             <div class="memories-container">
                 <div class="memory-card">
                     <div class="memory-img">
-                        <i class="fas fa-heart"></i>
+                        <!-- Heart image for our first date -->
+                        <img src="images/first-date.jpg" alt="Our First Date">
                     </div>
                     <div class="memory-content">
                         <h3 class="memory-title">Our First Date</h3>
-                        <div class="memory-date">June 12, 2020</div>
-                        <p class="memory-desc">That cozy coffee shop where we talked for hours and I knew I'd found someone special. Your laugh filled the room and my heart.</p>
+                        <div class="memory-date">September 28, 2023</div>
+                        <p class="memory-desc">In That restruant where we talked for hours and I knew I'd found  someone special. Your laugh filled the room and my heart.</p>
                     </div>
                 </div>
-                
+
                 <div class="memory-card">
                     <div class="memory-img">
-                        <i class="fas fa-sun"></i>
+                        <!-- Sun image for beach sunset -->
+                        <img src="images/memory2.jpg" alt="Beach Sunset">
                     </div>
                     <div class="memory-content">
-                        <h3 class="memory-title">Beach Sunset</h3>
-                        <div class="memory-date">August 5, 2021</div>
-                        <p class="memory-desc">Watching the sunset together, your hand in mine, feeling completely at peace. The golden light reflected in your eyes.</p>
+                        <h3 class="memory-title">Bestest Moment</h3>
+                        <div class="memory-date">January 16, 2025</div>
+                        <p class="memory-desc">This is the hand I want to hold for the rest of my life, and you are the one I want to be with, always..</p>
                     </div>
                 </div>
-                
+
                 <div class="memory-card">
                     <div class="memory-img">
-                        <i class="fas fa-mountain"></i>
+                        <!-- Mountain image for getaway -->
+                        <img src="images/memory3.jpg" alt="Mountain Getaway">
                     </div>
                     <div class="memory-content">
-                        <h3 class="memory-title">Mountain Getaway</h3>
-                        <div class="memory-date">October 18, 2022</div>
-                        <p class="memory-desc">That chilly morning wrapped in blankets, drinking hot cocoa with the most beautiful view - you by my side.</p>
+                        <h3 class="memory-title">My Princess</h3>
+                        <div class="memory-date">January 16, 2025  3:15</div>
+                        <p class="memory-desc">In that cold evening, when our hands first met, it wasn’t just warmth I felt—it was home - you by my side.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="section">
             <h2 class="section-title">My Love Letter</h2>
             <div class="love-letter">
                 <p>My dearest,</p>
-                <p>On this special day, I want to express how incredibly grateful I am to have you in my life. From the moment we met, you've brought so much joy, laughter, and meaning to my world.</p>
-                <p>Your smile brightens even my darkest days, your laughter is my favorite melody, and your love is the greatest gift I've ever received. You're not just my partner; you're my best friend, my confidant, and my greatest adventure.</p>
-                <p>On your birthday, I wish you endless happiness, exciting adventures, and dreams that come true. May this year bring you all the love and joy you bring to everyone around you.</p>
-                <p>Thank you for being you - genuine, kind, and absolutely extraordinary. I love you more than words can express.</p>
+                <p>On this special day, I want to express how incredibly grateful I am to have you in my life. From the
+                    moment we met, you've brought so much joy, laughter, and meaning to my world.</p>
+                <p>Your smile brightens even my darkest days, your laughter is my favorite melody, and your love is the
+                    greatest gift I've ever received. You're not just my partner; you're my best friend, my confidant,
+                    and my greatest adventure.</p>
+                <p>On your birthday, I wish you endless happiness, exciting adventures, and dreams that come true. May
+                    this year bring you all the love and joy you bring to everyone around you.</p>
+                <p>Thank you for being you - genuine, kind, and absolutely extraordinary. I love you more than words can
+                    express.</p>
                 <p>Forever yours,</p>
-                <p style="color: #ff6b8b; font-weight: 500; margin-top: 20px; font-family: 'Dancing Script', cursive; font-size: 2rem;">Your Beloved</p>
+                <p
+                    style="color: #ff6b8b; font-weight: 500; margin-top: 20px; font-family: 'Dancing Script', cursive; font-size: 2rem;">
+                    Your Beloved</p>
             </div>
         </div>
-        
+
         <div class="section">
             <h2 class="section-title">Love Tokens</h2>
             <div class="stickers-container">
@@ -538,7 +681,7 @@
                 </div>
             </div>
         </div>
-        
+        <!--         
         <div class="section">
             <h2 class="section-title">Our Treasured Moments</h2>
             <div class="gallery">
@@ -555,28 +698,83 @@
                     <i class="fas fa-film"></i>
                 </div>
             </div>
+        </div> -->
+        <!-- Replace the existing gallery section with this code -->
+        <div class="section">
+            <h2 class="section-title">Our Treasured Moments</h2>
+            <div class="gallery">
+                <!-- First treasured moment -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure2.jpg"
+                            alt="Beach Day">
+                    </div>
+                    <div class="gallery-caption">My star girl💕</div>
+                </div>
+
+                <!-- Second treasured moment -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure.jpg"
+                            alt="Coffee Date">
+                    </div>
+                    <div class="gallery-caption">Mirror Queen🪞👑</div>
+                </div>
+
+                <!-- Third treasured moment -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure3.jpg"
+                            alt="Mountain Hike">
+                    </div>
+                    <div class="gallery-caption">Hehehe! Alien👽</div>
+                </div>
+
+                <!-- Fourth treasured moment -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure5.jpg"
+                            alt="Movie Night">
+                    </div>
+                    <div class="gallery-caption">unexpected!!</div>
+                </div>
+                 <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure7.jpg"
+                            alt="Mountain Hike">
+                    </div>
+                    <div class="gallery-caption">Killer</div>
+                </div>
+                 <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="images/treasure4.jpg"
+                            alt="Mountain Hike">
+                    </div>
+                    <div class="gallery-caption">forehead ho to aisa😘</div>
+                </div>
+            </div>
         </div>
-        
+
         <button class="wish-btn" id="wishBtn">
             Make a Birthday Wish <i class="fas fa-magic"></i>
         </button>
     </div>
-    
+
     <div class="music-control" id="musicBtn">
         <i class="fas fa-music"></i>
     </div>
-    
+
     <!-- <audio id="birthdayMusic" loop>
         <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_8db6cccd85.mp3" type="audio/mpeg">
     </audio> -->
     <!-- <audio id="birthdayMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_8db6cccd85.mp3" type="audio/mpeg">
 </audio> -->
-<audio id="birthdayMusic" autoplay loop>
-  <source src="violin.mp3" type="audio/mpeg">
-  
-</audio>
-    
+    <audio id="birthdayMusic" autoplay loop>
+        <source src="violin.mp3" type="audio/mpeg">
+
+    </audio>
+
     <footer>
         Created with all my love for your special day ❤️ Forever yours
     </footer>
@@ -594,9 +792,9 @@
                     petal.style.width = (Math.random() * 20 + 15) + 'px';
                     petal.style.height = petal.style.width;
                     petal.style.opacity = Math.random() * 0.7 + 0.3;
-                    
+
                     petalsContainer.appendChild(petal);
-                    
+
                     // Animate petal
                     const animation = petal.animate([
                         { transform: 'translateY(0) rotate(0deg)', opacity: 0 },
@@ -606,24 +804,24 @@
                         duration: Math.random() * 8000 + 6000,
                         easing: 'ease-in-out'
                     });
-                    
+
                     animation.onfinish = () => petal.remove();
                 }, i * 500);
             }
         }
-        
+
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Create petals
             createPetals();
             setInterval(createPetals, 15000);
-            
+
             // Music player
             const musicBtn = document.getElementById('musicBtn');
             const birthdayMusic = document.getElementById('birthdayMusic');
-            
+
             let musicPlaying = false;
-            musicBtn.addEventListener('click', function() {
+            musicBtn.addEventListener('click', function () {
                 if (musicPlaying) {
                     birthdayMusic.pause();
                     musicBtn.innerHTML = '<i class="fas fa-music"></i>';
@@ -635,33 +833,33 @@
                 }
                 musicPlaying = !musicPlaying;
             });
-            
+
             // Wish button effect
             const wishBtn = document.getElementById('wishBtn');
-            wishBtn.addEventListener('click', function() {
+            wishBtn.addEventListener('click', function () {
                 // Create confetti effect
                 for (let i = 0; i < 150; i++) {
                     setTimeout(() => {
                         createConfetti();
                     }, i * 20);
                 }
-                
+
                 // Create extra petals
                 for (let i = 0; i < 50; i++) {
                     setTimeout(() => {
                         createPetals();
                     }, i * 100);
                 }
-                
+
                 wishBtn.innerHTML = 'Wish Granted! <i class="fas fa-sparkles"></i>';
                 wishBtn.style.background = 'linear-gradient(45deg, #9d4edd, #6a0572)';
-                
+
                 setTimeout(() => {
                     wishBtn.innerHTML = 'Make a Birthday Wish <i class="fas fa-magic"></i>';
                     wishBtn.style.background = 'linear-gradient(45deg, #ff6b8b, #c86bf8)';
                 }, 3000);
             });
-            
+
             // Create confetti
             function createConfetti() {
                 const colors = ['#ff6b8b', '#c86bf8', '#b967ff', '#e8c3ff'];
@@ -676,9 +874,9 @@
                 confetti.style.zIndex = '1000';
                 confetti.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
                 confetti.style.opacity = '0.9';
-                
+
                 document.body.appendChild(confetti);
-                
+
                 // Animate confetti
                 const animation = confetti.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
@@ -687,20 +885,20 @@
                     duration: Math.random() * 3000 + 2000,
                     easing: 'cubic-bezier(0,0,0.2,1)'
                 });
-                
+
                 animation.onfinish = () => confetti.remove();
             }
-            
+
             // Couple animation
             const couple = document.querySelector('.couple');
             couple.addEventListener('mouseenter', () => {
                 couple.style.transform = 'rotateY(20deg) scale(1.05)';
             });
-            
+
             couple.addEventListener('mouseleave', () => {
                 couple.style.transform = 'rotateY(0deg) scale(1)';
             });
-            
+
             // Initial music play attempt
             setTimeout(() => {
                 birthdayMusic.play().catch(e => console.log("Autoplay prevented: " + e));
@@ -711,6 +909,5 @@
         });
     </script>
 </body>
+
 </html>
-<!--only musid Image would be added
--->
