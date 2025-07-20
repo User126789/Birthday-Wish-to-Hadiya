@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0a1e, #2d0a2d, #1e0a1a);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            position: relative;
+        }
+
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b8b" d="M12,2C8,2,4,5,2,9c0,3,2,6,5,8c2,1,4,1,5,0c3-2,5-5,5-8C20,5,16,2,12,2z"/></svg>');
+            background-size: contain;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 5rem;
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            animation: pulse 3s infinite;
+            text-shadow: 0 0 30px rgba(255, 107, 139, 0.5);
+        }
+
+        h1 {
+            font-size: 5.5rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(45deg, #ff6b8b, #c86bf8, #b967ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(200, 107, 248, 0.3);
+        }
+
+        .subtitle {
+            font-size: 2.5rem;
+            color: #c86bf8;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 0 0 15px rgba(200, 107, 248, 0.3);
+        }
+
+        .couple-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 40px;
+            perspective: 1000px;
+        }
+
+        .couple {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="%233d1a3d" opacity="0.8"/><path d="M70,140 Q100,180 130,140" stroke="%23ff6b8b" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="80" cy="80" r="10" fill="%23ffffff"/><circle cx="120" cy="80" r="10" fill="%23ffffff"/></svg>') center/contain no-repeat;
+            transform: rotateY(0deg);
+            transition: transform 1s;
+            animation: float 8s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(255, 107, 139, 0.5));
+        }
+
+        .section {
+            background: rgba(45, 10, 45, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(200, 107, 248, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M40,80 Q60,40 80,80 Q100,120 120,80 Q140,40 160,80" stroke="%23c86bf8" stroke-width="1" fill="none" opacity="0.2"/></svg>');
+            background-size: 300px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: #ff6b8b;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(to right, #ff6b8b, #c86bf8);
+            border-radius: 2px;
+        }
+
+        .memories-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .memory-card {
+            width: 300px;
+            background: rgba(61, 26, 61, 0.8);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(200, 107, 248, 0.3);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(200, 107, 248, 0.4);
+        }
+
+        .memory-img {
+            height: 220px;
+            background: linear-gradient(45deg, #3d1a3d, #5a2a5a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4.5rem;
+            color: #ff6b8b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="none" stroke="rgba(200,107,248,0.3)" stroke-width="2"/></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+
+        .memory-content {
+            padding: 25px;
+            background: rgba(45, 10, 45, 0.5);
+        }
+
+        .memory-title {
+            font-size: 1.6rem;
+            color: #ff6b8b;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .memory-date {
+            color: #c86bf8;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .memory-desc {
+            color: #e8c3ff;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .love-letter {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #e8c3ff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(61, 26, 61, 0.6);
+            border-radius: 25px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(200, 107, 248, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid rgba(200, 107, 248, 0.2);
+        }
+
+        .love-letter:before {
+            content: '"';
+            position: absolute;
+            top: -50px;
+            left: -30px;
+            font-size: 12rem;
+            color: rgba(200, 107, 248, 0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: -1;
+        }
+
+        .stickers-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin: 60px 0;
+        }
+
+        .sticker {
+            width: 140px;
+            height: 140px;
+            background: rgba(61, 26, 61, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float 6s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(200, 107, 248, 0.3);
+        }
+
+        .sticker:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="95" fill="none" stroke="rgba(200,107,248,0.3)" stroke-width="5"/></svg>');
+            background-size: cover;
+        }
+
+        .sticker:nth-child(1) { 
+            color: #ff6b8b;
+            animation-delay: 0s;
+        }
+        .sticker:nth-child(2) { 
+            color: #c86bf8;
+            animation-delay: 1s;
+        }
+        .sticker:nth-child(3) { 
+            color: #ff6b8b;
+            animation-delay: 2s;
+        }
+        .sticker:nth-child(4) { 
+            color: #c86bf8;
+            animation-delay: 3s;
+        }
+
+        .sticker:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 20px 50px rgba(200, 107, 248, 0.5);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            height: 280px;
+            background: linear-gradient(45deg, #3d1a3d, #5a2a5a);
+            border-radius: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3.5rem;
+            color: #ff6b8b;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(200, 107, 248, 0.3);
+        }
+
+        .gallery-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="none" stroke="rgba(200,107,248,0.3)" stroke-width="3" rx="20"/></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(200, 107, 248, 0.5);
+        }
+
+        .wish-btn {
+            display: block;
+            margin: 60px auto;
+            padding: 20px 60px;
+            font-size: 1.7rem;
+            background: linear-gradient(45deg, #ff6b8b, #c86bf8);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(200, 107, 248, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .wish-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .wish-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(200, 107, 248, 0.6);
+        }
+
+        .wish-btn:hover:before {
+            left: 100%;
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            background: #c86bf8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 2s infinite;
+            border: 1px solid rgba(255, 107, 139, 0.3);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px #c86bf8;
+            background: #ff6b8b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #c86bf8;
+            font-size: 1.3rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-25px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes petal-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            h1 { font-size: 4rem; }
+            .subtitle { font-size: 1.8rem; }
+            .section-title { font-size: 2.5rem; }
+            .couple-container { width: 280px; height: 280px; }
+            .section { padding: 40px 30px; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .subtitle { font-size: 1.5rem; }
+            .logo { font-size: 3.5rem; }
+            .section { padding: 30px 20px; }
+            .memory-card { width: 100%; max-width: 350px; }
+            .section-title { font-size: 2rem; }
+            .sticker { width: 120px; height: 120px; font-size: 3rem; }
+            .wish-btn { padding: 18px 50px; font-size: 1.5rem; }
+            .music-control { width: 70px; height: 70px; font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating petals background -->
+    <div class="petals-container"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Happy Birthday Hadiya!</h1>
+            <p class="subtitle">To the love of my life, my everything</p>
+            
+            <div class="couple-container">
+                <div class="couple"></div>
+            </div>
+        </header>
+        
+        <div class="section">
+            <h2 class="section-title">Our Journey Together</h2>
+            <div class="memories-container">
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Our First Date</h3>
+                        <div class="memory-date">June 12, 2020</div>
+                        <p class="memory-desc">That cozy coffee shop where we talked for hours and I knew I'd found someone special. Your laugh filled the room and my heart.</p>
+                    </div>
+                </div>
+                
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Beach Sunset</h3>
+                        <div class="memory-date">August 5, 2021</div>
+                        <p class="memory-desc">Watching the sunset together, your hand in mine, feeling completely at peace. The golden light reflected in your eyes.</p>
+                    </div>
+                </div>
+                
+                <div class="memory-card">
+                    <div class="memory-img">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="memory-content">
+                        <h3 class="memory-title">Mountain Getaway</h3>
+                        <div class="memory-date">October 18, 2022</div>
+                        <p class="memory-desc">That chilly morning wrapped in blankets, drinking hot cocoa with the most beautiful view - you by my side.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">My Love Letter</h2>
+            <div class="love-letter">
+                <p>My dearest,</p>
+                <p>On this special day, I want to express how incredibly grateful I am to have you in my life. From the moment we met, you've brought so much joy, laughter, and meaning to my world.</p>
+                <p>Your smile brightens even my darkest days, your laughter is my favorite melody, and your love is the greatest gift I've ever received. You're not just my partner; you're my best friend, my confidant, and my greatest adventure.</p>
+                <p>On your birthday, I wish you endless happiness, exciting adventures, and dreams that come true. May this year bring you all the love and joy you bring to everyone around you.</p>
+                <p>Thank you for being you - genuine, kind, and absolutely extraordinary. I love you more than words can express.</p>
+                <p>Forever yours,</p>
+                <p style="color: #ff6b8b; font-weight: 500; margin-top: 20px; font-family: 'Dancing Script', cursive; font-size: 2rem;">Your Beloved</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Love Tokens</h2>
+            <div class="stickers-container">
+                <div class="sticker">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="sticker">
+                    <i class="fas fa-kiss-wink-heart"></i>
+                </div>
+                <div class="sticker">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="sticker">
+                    <i class="fas fa-cake-candles"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">Our Treasured Moments</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-hands-holding-heart"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <div class="gallery-item">
+                    <i class="fas fa-film"></i>
+                </div>
+            </div>
+        </div>
+        
+        <button class="wish-btn" id="wishBtn">
+            Make a Birthday Wish <i class="fas fa-magic"></i>
+        </button>
+    </div>
+    
+    <div class="music-control" id="musicBtn">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <!-- <audio id="birthdayMusic" loop>
+        <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_8db6cccd85.mp3" type="audio/mpeg">
+    </audio> -->
+    <!-- <audio id="birthdayMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/26/audio_8db6cccd85.mp3" type="audio/mpeg">
+</audio> -->
+<audio id="birthdayMusic" autoplay loop>
+  <source src="violin.mp3" type="audio/mpeg">
+  
+</audio>
+    
+    <footer>
+        Created with all my love for your special day ❤️ Forever yours
+    </footer>
+
+    <script>
+        // Create floating petals
+        function createPetals() {
+            const petalsContainer = document.querySelector('.petals-container');
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.top = '-30px';
+                    petal.style.width = (Math.random() * 20 + 15) + 'px';
+                    petal.style.height = petal.style.width;
+                    petal.style.opacity = Math.random() * 0.7 + 0.3;
+                    
+                    petalsContainer.appendChild(petal);
+                    
+                    // Animate petal
+                    const animation = petal.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 0 },
+                        { transform: 'translateY(100px) rotate(90deg)', opacity: 1 },
+                        { transform: `translateY(120vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 8000 + 6000,
+                        easing: 'ease-in-out'
+                    });
+                    
+                    animation.onfinish = () => petal.remove();
+                }, i * 500);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create petals
+            createPetals();
+            setInterval(createPetals, 15000);
+            
+            // Music player
+            const musicBtn = document.getElementById('musicBtn');
+            const birthdayMusic = document.getElementById('birthdayMusic');
+            
+            let musicPlaying = false;
+            musicBtn.addEventListener('click', function() {
+                if (musicPlaying) {
+                    birthdayMusic.pause();
+                    musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                    musicBtn.style.background = '#c86bf8';
+                } else {
+                    birthdayMusic.play().catch(e => console.log("Autoplay prevented: " + e));
+                    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    musicBtn.style.background = '#ff6b8b';
+                }
+                musicPlaying = !musicPlaying;
+            });
+            
+            // Wish button effect
+            const wishBtn = document.getElementById('wishBtn');
+            wishBtn.addEventListener('click', function() {
+                // Create confetti effect
+                for (let i = 0; i < 150; i++) {
+                    setTimeout(() => {
+                        createConfetti();
+                    }, i * 20);
+                }
+                
+                // Create extra petals
+                for (let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createPetals();
+                    }, i * 100);
+                }
+                
+                wishBtn.innerHTML = 'Wish Granted! <i class="fas fa-sparkles"></i>';
+                wishBtn.style.background = 'linear-gradient(45deg, #9d4edd, #6a0572)';
+                
+                setTimeout(() => {
+                    wishBtn.innerHTML = 'Make a Birthday Wish <i class="fas fa-magic"></i>';
+                    wishBtn.style.background = 'linear-gradient(45deg, #ff6b8b, #c86bf8)';
+                }, 3000);
+            });
+            
+            // Create confetti
+            function createConfetti() {
+                const colors = ['#ff6b8b', '#c86bf8', '#b967ff', '#e8c3ff'];
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '20px';
+                confetti.style.height = '20px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-30px';
+                confetti.style.zIndex = '1000';
+                confetti.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
+                confetti.style.opacity = '0.9';
+                
+                document.body.appendChild(confetti);
+                
+                // Animate confetti
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${Math.random() * 100 + 80}vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0,0,0.2,1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+            
+            // Couple animation
+            const couple = document.querySelector('.couple');
+            couple.addEventListener('mouseenter', () => {
+                couple.style.transform = 'rotateY(20deg) scale(1.05)';
+            });
+            
+            couple.addEventListener('mouseleave', () => {
+                couple.style.transform = 'rotateY(0deg) scale(1)';
+            });
+            
+            // Initial music play attempt
+            setTimeout(() => {
+                birthdayMusic.play().catch(e => console.log("Autoplay prevented: " + e));
+                musicPlaying = true;
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                musicBtn.style.background = '#ff6b8b';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
