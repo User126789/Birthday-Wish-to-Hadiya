@@ -9,6 +9,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            // Initialize EmailJS with your user ID
+            emailjs.init('a8Lb-PbPAItRkHI1e'); // Replace with your actual EmailJS user ID
+        })();
+    </script>
     <style>
         * {
             margin: 0;
@@ -16,16 +24,23 @@
             box-sizing: border-box;
         }
 
+        /* Improved performance with optimized animations */
+        html, body {
+            overflow-x: hidden;
+        }
+        
         body {
             background: linear-gradient(135deg, #1a0a1e, #2d0a2d, #1e0a1a);
             min-height: 100vh;
-            overflow-x: hidden;
             font-family: 'Montserrat', sans-serif;
             color: #fff;
             position: relative;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23ff6b8b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') 12 12, auto;
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
+        /* Reduced number of petals */
         .petal, .heart {
             position: absolute;
             width: 20px;
@@ -126,10 +141,11 @@
             position: relative;
             overflow: hidden;
             transition: transform 0.5s, box-shadow 0.5s;
+            transform: translateZ(0); /* Improve performance */
         }
 
         .section:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) translateZ(0);
             box-shadow: 0 30px 60px rgba(200, 107, 248, 0.4);
         }
 
@@ -194,10 +210,11 @@
             border: 1px solid rgba(200, 107, 248, 0.3);
             transform-style: preserve-3d;
             perspective: 1000px;
+            transform: translateZ(0); /* Improve performance */
         }
 
         .memory-card:hover {
-            transform: translateY(-15px) scale(1.03) rotateY(10deg);
+            transform: translateY(-15px) scale(1.03) rotateY(10deg) translateZ(0);
             box-shadow: 0 25px 50px rgba(200, 107, 248, 0.4);
         }
 
@@ -338,6 +355,7 @@
             overflow: hidden;
             border: 1px solid rgba(200, 107, 248, 0.3);
             cursor: pointer;
+            transform: translateZ(0); /* Improve performance */
         }
 
         .sticker:before {
@@ -373,7 +391,7 @@
         }
 
         .sticker:hover {
-            transform: scale(1.15) rotate(10deg);
+            transform: scale(1.15) rotate(10deg) translateZ(0);
             box-shadow: 0 20px 50px rgba(200, 107, 248, 0.5);
             animation: pulse 0.5s infinite;
         }
@@ -398,6 +416,7 @@
             border: 1px solid rgba(200, 107, 248, 0.3);
             perspective: 1000px;
             transform-style: preserve-3d;
+            transform: translateZ(0); /* Improve performance */
         }
 
         .gallery-image {
@@ -452,7 +471,7 @@
         }
 
         .gallery-item:hover {
-            transform: translateY(-10px) scale(1.03) rotateX(5deg);
+            transform: translateY(-10px) scale(1.03) rotateX(5deg) translateZ(0);
             box-shadow: 0 25px 50px rgba(200, 107, 248, 0.5);
         }
 
@@ -487,7 +506,7 @@
         }
 
         .wish-btn:hover {
-            transform: translateY(-8px) scale(1.05) rotate(1deg);
+            transform: translateY(-8px) scale(1.05) rotate(1deg) translateZ(0);
             box-shadow: 0 25px 50px rgba(200, 107, 248, 0.6);
         }
 
@@ -514,10 +533,11 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 2s infinite, rotate 15s infinite linear;
             border: 1px solid rgba(255, 107, 139, 0.3);
+            transform: translateZ(0); /* Improve performance */
         }
 
         .music-control:hover {
-            transform: scale(1.1) rotate(180deg);
+            transform: scale(1.1) rotate(180deg) translateZ(0);
             box-shadow: 0 0 30px #c86bf8;
             background: #ff6b8b;
             animation: pulse 0.5s infinite, rotate 5s infinite linear;
@@ -542,6 +562,7 @@
             box-shadow: 0 0 10px #ff6b8b, 0 0 20px #ff6b8b;
             pointer-events: none;
             z-index: 1;
+            transform: translateZ(0); /* Improve performance */
         }
 
         .cursor-heart {
@@ -565,6 +586,7 @@
             background-size: contain;
             pointer-events: none;
             z-index: 100;
+            transform: translateZ(0); /* Improve performance */
         }
 
         /* Animations */
@@ -652,6 +674,158 @@
             100% { opacity: 1; transform: scale(1) rotate(0deg); }
         }
 
+        /* Wish Modal Styles */
+        .wish-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 10, 45, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .wish-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .wish-box {
+            background: linear-gradient(135deg, #3d1a3d, #5a2a5a);
+            border-radius: 30px;
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(200, 107, 248, 0.5);
+            position: relative;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: glow 3s infinite alternate;
+        }
+
+        .wish-modal.active .wish-box {
+            transform: scale(1);
+        }
+
+        .wish-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path d="M40,80 Q60,40 80,80 Q100,120 120,80 Q140,40 160,80" stroke="%23c86bf8" stroke-width="1" fill="none" opacity="0.2"/></svg>');
+            background-size: 300px;
+            opacity: 0.3;
+            animation: patternMove 20s linear infinite;
+        }
+
+        .wish-title {
+            font-size: 2.5rem;
+            color: #ff6b8b;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 15px rgba(255, 107, 139, 0.5);
+        }
+
+        .wish-textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(45, 10, 45, 0.7);
+            border: 2px solid rgba(200, 107, 248, 0.5);
+            border-radius: 20px;
+            padding: 20px;
+            color: #e8c3ff;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            resize: none;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            /* FIXED: Added cursor styles */
+            caret-color: #ff6b8b;
+            line-height: 1.6;
+        }
+
+        .wish-textarea:focus {
+            outline: none;
+            border-color: #ff6b8b;
+            box-shadow: 0 0 20px rgba(255, 107, 139, 0.5);
+        }
+
+        .wish-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .wish-submit, .wish-cancel {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0); /* Improve performance */
+        }
+
+        .wish-submit {
+            background: linear-gradient(45deg, #ff6b8b, #c86bf8);
+            color: white;
+        }
+
+        .wish-cancel {
+            background: rgba(61, 26, 61, 0.8);
+            color: #e8c3ff;
+            border: 1px solid rgba(200, 107, 248, 0.5);
+        }
+
+        .wish-submit:hover {
+            transform: translateY(-5px) translateZ(0);
+            box-shadow: 0 10px 30px rgba(200, 107, 248, 0.6);
+        }
+
+        .wish-cancel:hover {
+            background: rgba(200, 107, 248, 0.2);
+        }
+
+        .wish-message {
+            margin-top: 20px;
+            text-align: center;
+            color: #ff6b8b;
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .wish-message.show {
+            opacity: 1;
+        }
+
+        /* Floating hearts animation */
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             h1 {
@@ -669,6 +843,12 @@
             }
             .section {
                 padding: 40px 30px;
+            }
+            .wish-title {
+                font-size: 2rem;
+            }
+            .wish-textarea {
+                height: 150px;
             }
         }
 
@@ -705,6 +885,13 @@
                 width: 70px;
                 height: 70px;
                 font-size: 1.8rem;
+            }
+            .wish-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .wish-submit, .wish-cancel {
+                width: 100%;
             }
         }
     </style>
@@ -768,7 +955,7 @@
                     <div class="memory-content">
                         <h3 class="memory-title">My Princess</h3>
                         <div class="memory-date">January 16, 2025  3:15</div>
-                        <p class="memory-desc">In that cold evening, when our hands first met, it wasn’t just warmth I felt—it was home - you by my side.</p>
+                        <p class="memory-desc">In that cold evening, when our hands first met, it wasn't just warmth I felt—it was home - you by my side.</p>
                     </div>
                 </div>
             </div>
@@ -860,6 +1047,19 @@
         </button>
     </div>
 
+    <!-- Wish Modal -->
+    <div class="wish-modal" id="wishModal">
+        <div class="wish-box">
+            <h2 class="wish-title">Make Your Birthday Wish</h2>
+            <textarea class="wish-textarea" id="wishText" placeholder="Write your special wish here..."></textarea>
+            <div class="wish-buttons">
+                <button class="wish-submit" id="wishSubmit">Send Wish <i class="fas fa-paper-plane"></i></button>
+                <button class="wish-cancel" id="wishCancel">Cancel</button>
+            </div>
+            <div class="wish-message" id="wishMessage"></div>
+        </div>
+    </div>
+
     <div class="music-control" id="musicBtn">
         <i class="fas fa-music"></i>
     </div>
@@ -876,17 +1076,17 @@
         // Create floating petals and hearts
         function createPetals() {
             const petalsContainer = document.querySelector('.petals-container');
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 15; i++) { // Reduced from 20 to 15
                 setTimeout(() => {
                     const petal = document.createElement('div');
                     petal.className = Math.random() > 0.5 ? 'petal' : 'heart';
                     petal.style.left = Math.random() * 100 + 'vw';
                     petal.style.top = '-30px';
-                    const size = (Math.random() * 20 + 15);
+                    const size = (Math.random() * 15 + 10); // Reduced max size
                     petal.style.width = size + 'px';
                     petal.style.height = size + 'px';
                     petal.style.opacity = Math.random() * 0.7 + 0.3;
-                    petal.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    petal.style.animationDuration = (Math.random() * 8 + 8) + 's'; // Reduced duration
                     
                     petalsContainer.appendChild(petal);
 
@@ -896,19 +1096,19 @@
                         { transform: 'translateY(100px) rotate(90deg)', opacity: 1 },
                         { transform: `translateY(120vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
                     ], {
-                        duration: Math.random() * 8000 + 6000,
+                        duration: Math.random() * 7000 + 5000, // Reduced duration
                         easing: 'ease-in-out'
                     });
 
                     animation.onfinish = () => petal.remove();
-                }, i * 500);
+                }, i * 700); // Increased delay
             }
         }
 
         // Create fireflies
         function createFireflies() {
             const container = document.querySelector('.fireflies-container');
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 15; i++) { // Reduced from 20 to 15
                 const firefly = document.createElement('div');
                 firefly.className = 'firefly';
                 
@@ -917,7 +1117,7 @@
                 firefly.style.top = Math.random() * 100 + 'vh';
                 
                 // Random size
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 3 + 2; // Reduced max size
                 firefly.style.width = size + 'px';
                 firefly.style.height = size + 'px';
                 
@@ -931,13 +1131,13 @@
         function animateFirefly(firefly) {
             const keyframes = [
                 { transform: `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`, opacity: 0.3 },
-                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, opacity: 1 },
-                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, opacity: 0.5 },
-                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, opacity: 0.8 }
+                { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)`, opacity: 1 },
+                { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)`, opacity: 0.5 },
+                { transform: `translate(${Math.random() * 80 - 40}px, ${Math.random() * 80 - 40}px)`, opacity: 0.8 }
             ];
             
             const options = {
-                duration: Math.random() * 8000 + 4000,
+                duration: Math.random() * 6000 + 3000, // Reduced duration
                 iterations: Infinity,
                 direction: 'alternate',
                 easing: 'ease-in-out'
@@ -950,7 +1150,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Create petals and hearts
             createPetals();
-            setInterval(createPetals, 15000);
+            setInterval(createPetals, 20000); // Increased interval
             
             // Create fireflies
             createFireflies();
@@ -973,45 +1173,119 @@
                 musicPlaying = !musicPlaying;
             });
 
-            // Wish button effect
+            // Wish modal functionality
             const wishBtn = document.getElementById('wishBtn');
-            wishBtn.addEventListener('click', function () {
-                // Create confetti effect
-                for (let i = 0; i < 150; i++) {
-                    setTimeout(() => {
-                        createConfetti();
-                    }, i * 20);
-                }
+            const wishModal = document.getElementById('wishModal');
+            const wishText = document.getElementById('wishText');
+            const wishSubmit = document.getElementById('wishSubmit');
+            const wishCancel = document.getElementById('wishCancel');
+            const wishMessage = document.getElementById('wishMessage');
 
-                // Create extra petals
-                for (let i = 0; i < 50; i++) {
-                    setTimeout(() => {
-                        createPetals();
-                    }, i * 100);
-                }
-
-                wishBtn.innerHTML = 'Wish Granted! <i class="fas fa-sparkles"></i>';
-                wishBtn.style.background = 'linear-gradient(45deg, #9d4edd, #6a0572)';
-
+            wishBtn.addEventListener('click', function() {
+                wishModal.classList.add('active');
+                createHeartsAroundModal();
+                // Focus on textarea after animation completes
                 setTimeout(() => {
-                    wishBtn.innerHTML = 'Make a Birthday Wish <i class="fas fa-magic"></i>';
-                    wishBtn.style.background = 'linear-gradient(45deg, #ff6b8b, #c86bf8)';
-                }, 3000);
+                    wishText.focus();
+                }, 300);
             });
+
+            wishCancel.addEventListener('click', function() {
+                wishModal.classList.remove('active');
+                wishText.value = '';
+                wishMessage.classList.remove('show');
+            });
+
+            wishSubmit.addEventListener('click', function() {
+                const wish = wishText.value.trim();
+                
+                if (wish) {
+                    // Create confetti effect
+                    for (let i = 0; i < 120; i++) { // Reduced from 150
+                        setTimeout(() => {
+                            createConfetti();
+                        }, i * 25);
+                    }
+                    
+                    // Show success message
+                    wishMessage.textContent = "Your wish has been sent with love! 💖";
+                    wishMessage.classList.add('show');
+                    
+                    // Send the wish via EmailJS
+                    sendWishToYou(wish);
+                    
+                    // Close modal after delay
+                    setTimeout(() => {
+                        wishModal.classList.remove('active');
+                        wishText.value = '';
+                        wishMessage.classList.remove('show');
+                    }, 3000);
+                } else {
+                    wishMessage.textContent = "Please write your wish before sending!";
+                    wishMessage.classList.add('show');
+                }
+            });
+
+            function createHeartsAroundModal() {
+                const modal = document.querySelector('.wish-box');
+                const rect = modal.getBoundingClientRect();
+                
+                for (let i = 0; i < 20; i++) { // Reduced from 30
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'heart';
+                        heart.style.position = 'fixed';
+                        heart.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                        heart.style.top = (rect.bottom + 10) + 'px';
+                        heart.style.width = (Math.random() * 15 + 10) + 'px'; // Reduced max size
+                        heart.style.height = heart.style.width;
+                        heart.style.zIndex = '1001';
+                        heart.style.opacity = '0.8';
+                        
+                        document.body.appendChild(heart);
+                        
+                        const animation = heart.animate([
+                            { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+                            { transform: 'translateY(-' + (Math.random() * 150 + 80) + 'px) rotate(' + (Math.random() * 360) + 'deg)', opacity: 0 }
+                        ], {
+                            duration: Math.random() * 2500 + 1500, // Reduced duration
+                            easing: 'ease-out'
+                        });
+                        
+                        animation.onfinish = () => heart.remove();
+                    }, i * 150); // Increased delay
+                }
+            }
+
+            // Function to send the wish via EmailJS
+            function sendWishToYou(wish) {
+                emailjs.send('service_mer8orc', 'template_q1n4kur', {
+                    message: wish,
+                    from_name: "Hadiya's Birthday Page",
+                   // reply_to: "ROUGHUSE998@GMAIL.com"
+                })
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    // Fallback message if email fails
+                    wishMessage.textContent = "Wish saved in our hearts! 💖 (Email not sent)";
+                });
+            }
 
             // Create confetti
             function createConfetti() {
                 const colors = ['#ff6b8b', '#c86bf8', '#b967ff', '#e8c3ff'];
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
-                confetti.style.width = '20px';
-                confetti.style.height = '20px';
+                confetti.style.width = '18px'; // Reduced size
+                confetti.style.height = '18px'; // Reduced size
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.borderRadius = '50%';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.top = '-30px';
                 confetti.style.zIndex = '1000';
-                confetti.style.boxShadow = '0 0 10px rgba(255,255,255,0.8)';
+                confetti.style.boxShadow = '0 0 8px rgba(255,255,255,0.8)'; // Reduced shadow
                 confetti.style.opacity = '0.9';
 
                 document.body.appendChild(confetti);
@@ -1019,9 +1293,9 @@
                 // Animate confetti
                 const animation = confetti.animate([
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(${Math.random() * 100 + 80}vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    { transform: `translateY(${Math.random() * 80 + 60}vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
                 ], {
-                    duration: Math.random() * 3000 + 2000,
+                    duration: Math.random() * 2500 + 1500, // Reduced duration
                     easing: 'cubic-bezier(0,0,0.2,1)'
                 });
 
@@ -1044,21 +1318,21 @@
                 const centerX = rect.left + rect.width/2;
                 const centerY = rect.top + rect.height/2;
                 
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 20; i++) { // Reduced from 30
                     const heart = document.createElement('div');
                     heart.className = 'kiss-effect';
                     heart.style.position = 'fixed';
                     heart.style.left = centerX + 'px';
                     heart.style.top = centerY + 'px';
-                    heart.style.width = '20px';
-                    heart.style.height = '20px';
+                    heart.style.width = '18px'; // Reduced size
+                    heart.style.height = '18px'; // Reduced size
                     heart.style.zIndex = '100';
                     
                     document.body.appendChild(heart);
                     
                     // Animate heart
                     const angle = Math.random() * Math.PI * 2;
-                    const distance = Math.random() * 100 + 50;
+                    const distance = Math.random() * 80 + 40; // Reduced distance
                     const x = Math.cos(angle) * distance;
                     const y = Math.sin(angle) * distance;
                     
@@ -1066,7 +1340,7 @@
                         { transform: 'translate(0, 0) scale(1)', opacity: 1 },
                         { transform: `translate(${x}px, ${y}px) scale(0.2)`, opacity: 0 }
                     ], {
-                        duration: 1500,
+                        duration: 1200, // Reduced duration
                         easing: 'ease-out'
                     });
                     
@@ -1090,14 +1364,14 @@
                 cursorHeart.style.opacity = '1';
                 
                 // Create trailing hearts
-                if (Math.random() > 0.7) {
+                if (Math.random() > 0.8) { // Reduced frequency
                     const trailHeart = document.createElement('div');
                     trailHeart.className = 'heart';
                     trailHeart.style.position = 'fixed';
                     trailHeart.style.left = e.clientX + 'px';
                     trailHeart.style.top = e.clientY + 'px';
-                    trailHeart.style.width = '15px';
-                    trailHeart.style.height = '15px';
+                    trailHeart.style.width = '14px'; // Reduced size
+                    trailHeart.style.height = '14px'; // Reduced size
                     trailHeart.style.zIndex = '999';
                     trailHeart.style.opacity = '0.7';
                     
@@ -1108,7 +1382,7 @@
                         { transform: 'scale(1)', opacity: 0.7 },
                         { transform: 'scale(0.2)', opacity: 0 }
                     ], {
-                        duration: 800,
+                        duration: 700, // Reduced duration
                         easing: 'ease-out'
                     });
                     
@@ -1125,22 +1399,22 @@
                     }, 500);
                     
                     // Create mini hearts
-                    for (let i = 0; i < 10; i++) {
+                    for (let i = 0; i < 8; i++) { // Reduced from 10
                         const rect = this.getBoundingClientRect();
                         const heart = document.createElement('div');
                         heart.className = 'heart';
                         heart.style.position = 'fixed';
                         heart.style.left = (rect.left + rect.width/2) + 'px';
                         heart.style.top = (rect.top + rect.height/2) + 'px';
-                        heart.style.width = '15px';
-                        heart.style.height = '15px';
+                        heart.style.width = '14px'; // Reduced size
+                        heart.style.height = '14px'; // Reduced size
                         heart.style.zIndex = '100';
                         
                         document.body.appendChild(heart);
                         
                         // Animate heart
                         const angle = Math.random() * Math.PI * 2;
-                        const distance = Math.random() * 50 + 30;
+                        const distance = Math.random() * 40 + 20; // Reduced distance
                         const x = Math.cos(angle) * distance;
                         const y = Math.sin(angle) * distance;
                         
@@ -1148,7 +1422,7 @@
                             { transform: 'translate(0, 0) scale(1)', opacity: 1 },
                             { transform: `translate(${x}px, ${y}px) scale(0.2)`, opacity: 0 }
                         ], {
-                            duration: 1000,
+                            duration: 900, // Reduced duration
                             easing: 'ease-out'
                         });
                         
@@ -1159,5 +1433,4 @@
         });
     </script>
 </body>
-
 </html>
